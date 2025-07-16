@@ -18,7 +18,7 @@ import PlayingCard
 import ArgumentParser
 
 @main
-struct Deal: ParsableCommand {
+struct Dealer: ParsableCommand {
     enum Error: Swift.Error, CustomStringConvertible {
         case notEnoughCards
 
