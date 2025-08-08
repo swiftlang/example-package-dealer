@@ -1,54 +1,65 @@
-/*
- This source file is part of the Swift.org open source project
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the example package dealer open source project
+//
+// Copyright (c) 2021-2025 Apple Inc. and the Swift project authors
+// Licensed under Apache License v2.0 with Runtime Library Exception
+//
+// See https://swift.org/LICENSE.txt for license information
+//
+//===----------------------------------------------------------------------===//
 
- Copyright 2021 Apple Inc. and the Swift project authors
- Licensed under Apache License v2.0 with Runtime Library Exception
 
- See http://swift.org/LICENSE.txt for license information
- See http://swift.org/CONTRIBUTORS.txt for Swift project authors
-*/
-
-import XCTest
+import Testing
+import Foundation
 import class Foundation.Bundle
 
-final class DealerTests: XCTestCase {
+final class Marker {
+}
+
+struct DealerTests {
+    @Test
     func testUsage() throws {
         let (status, output, error) = try execute(with: ["--help"])
-        XCTAssertEqual(status, EXIT_SUCCESS)
-        XCTAssert(output?.starts(with: "OVERVIEW: Shuffles a deck of playing cards and deals a number of cards.") ?? false)
-        XCTAssertEqual(error, "")
+        #expect(status == EXIT_SUCCESS)
+        #expect(output?.starts(with: "OVERVIEW: Shuffles a deck of playing cards and deals a number of cards.") ?? false)
+        #expect(error == "")
     }
 
+    @Test
     func testDealOneCard() throws {
         let (status, output, error) = try execute(with: ["1"])
-        XCTAssertEqual(status, EXIT_SUCCESS)
-        XCTAssertEqual(output?.filter(\.isPlayingCardSuit).count, 1)
-
-        XCTAssertEqual(error, "")
+        #expect(status == EXIT_SUCCESS)
+        #expect(output?.filter(\.isPlayingCardSuit).count == 1)
+        
+        #expect(error == "")
     }
 
+    @Test
     func testDealTenCards() throws {
         let (status, output, error) = try execute(with: ["10"])
-        XCTAssertEqual(status, EXIT_SUCCESS)
-        XCTAssertEqual(output?.filter(\.isPlayingCardSuit).count, 10)
-
-        XCTAssertEqual(error, "")
+        #expect(status == EXIT_SUCCESS)
+        #expect(output?.filter(\.isPlayingCardSuit).count == 10)
+        
+        #expect(error == "")
     }
 
+    @Test
     func testDealThirteenCardsFourTimes() throws {
         let (status, output, error) = try execute(with: ["13", "13", "13", "13"])
-        XCTAssertEqual(status, EXIT_SUCCESS)
-        XCTAssertEqual(output?.filter(\.isPlayingCardSuit).count, 52)
-        XCTAssertEqual(output?.filter(\.isNewline).count, 4)
-
-        XCTAssertEqual(error, "")
+        #expect(status == EXIT_SUCCESS)
+        #expect(output?.filter(\.isPlayingCardSuit).count == 52)
+        #expect(output?.filter(\.isNewline).count == 4)
+        
+        #expect(error == "")
     }
 
+    @Test
     func testDealOneHundredCards() throws {
         let (status, output, error) = try execute(with: ["100"])
-        XCTAssertNotEqual(status, EXIT_SUCCESS)
-        XCTAssertEqual(output, "")
-        XCTAssertEqual(error, "Error: Not enough cards\n")
+        #expect(status != EXIT_SUCCESS)
+        #expect(output == "")
+        #expect(error == "Error: Not enough cards\n")
     }
 
     /// Returns path to the built products directory.

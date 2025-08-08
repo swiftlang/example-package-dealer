@@ -1,12 +1,13 @@
-/*
- This source file is part of the Swift.org open source project
-
- Copyright 2015 – 2021 Apple Inc. and the Swift project authors
- Licensed under Apache License v2.0 with Runtime Library Exception
-
- See http://swift.org/LICENSE.txt for license information
- See http://swift.org/CONTRIBUTORS.txt for Swift project authors
-*/
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the example package dealer open source project
+//
+// Copyright (c) 2015-2025 Apple Inc. and the Swift project authors
+// Licensed under Apache License v2.0 with Runtime Library Exception
+//
+// See https://swift.org/LICENSE.txt for license information
+//
+//===----------------------------------------------------------------------===//
 
 #if os(Linux)
 import Glibc
@@ -30,7 +31,7 @@ struct Dealer: ParsableCommand {
         }
     }
 
-    static var configuration = CommandConfiguration(
+    static let configuration = CommandConfiguration(
             abstract: "Shuffles a deck of playing cards and deals a number of cards.",
             discussion: """
                 For each count argument, prints a line of tab-delimited cards to stdout,
