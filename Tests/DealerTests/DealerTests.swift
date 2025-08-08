@@ -25,7 +25,7 @@ struct DealerTests {
     #expect(
       output?.starts(
         with: "OVERVIEW: Shuffles a deck of playing cards and deals a number of cards.") ?? false)
-    #expect(error == "")
+    #expect(error?.isEmpty == true)
   }
 
   @Test
@@ -34,7 +34,8 @@ struct DealerTests {
     #expect(status == EXIT_SUCCESS)
     #expect(output?.filter(\.isPlayingCardSuit).count == 1)
 
-    #expect(error == "")
+    #expect(error?.isEmpty == true)
+
   }
 
   @Test
@@ -43,7 +44,8 @@ struct DealerTests {
     #expect(status == EXIT_SUCCESS)
     #expect(output?.filter(\.isPlayingCardSuit).count == 10)
 
-    #expect(error == "")
+    #expect(error?.isEmpty == true)
+
   }
 
   @Test
@@ -53,14 +55,16 @@ struct DealerTests {
     #expect(output?.filter(\.isPlayingCardSuit).count == 52)
     #expect(output?.filter(\.isNewline).count == 4)
 
-    #expect(error == "")
+    #expect(error?.isEmpty == true)
+
   }
 
   @Test
   func testDealOneHundredCards() throws {
     let (status, output, error) = try execute(with: ["100"])
     #expect(status != EXIT_SUCCESS)
-    #expect(output == "")
+    #expect(output?.isEmpty == true)
+
     #expect(error == "Error: Not enough cards\n")
   }
 
