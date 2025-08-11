@@ -14,8 +14,7 @@ import Testing
 
 import class Foundation.Bundle
 
-final class Marker {
-}
+@testable import dealer
 
 struct DealerTests {
   @Test
@@ -71,10 +70,7 @@ struct DealerTests {
   /// Returns path to the built products directory.
   var productsDirectory: URL {
     #if os(macOS)
-      for bundle in Bundle.allBundles where bundle.bundlePath.hasSuffix(".xctest") {
-        return bundle.bundleURL.deletingLastPathComponent()
-      }
-      fatalError("couldn't find the products directory")
+      return Bundle(for: BundleMarker.self).bundleURL.deletingLastPathComponent()
     #else
       return Bundle.main.bundleURL
     #endif

@@ -68,3 +68,7 @@ struct Dealer: ParsableCommand {
     }
   }
 }
+
+// Empty class that provides a convenient handle to request
+// the bundle that contains this code.
+class BundleMarker {}
