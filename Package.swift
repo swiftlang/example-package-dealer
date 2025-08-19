@@ -25,7 +25,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/apple/example-package-deckofplayingcards.git",
-            from: "3.0.0"),
+            from: "4.0.0"),
         .package(
             url: "https://github.com/apple/swift-argument-parser.git",
             from: "1.6.0"),
